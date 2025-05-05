@@ -1,27 +1,104 @@
-let input = document.getElementById('inputBox');
-let buttons = document.querySelectorAll('button');
+function showForm(formId) {
+    const home = document.querySelector('.main');
+    const forms = document.querySelectorAll('.form-box');
+    const dashboard = document.getElementById('admin-dashboard');
+    forms.forEach(form => {
+        form.style.display = 'none';
+    });
+    if (dashboard) dashboard.style.display ='none';
 
-let string = "";
-let arr = Array.from(buttons);
-arr.forEach(button => {
-    button.addEventListener('click', (e) =>{
-        if(e.target.innerHTML == '='){
-            string = eval(string);
-            input.value = string;
-        }
+    const targetForm = document.getElementById(formId);
+    if (targetForm) {
+        targetForm.style.display = 'block';
+    }
+}
 
-        else if(e.target.innerHTML == 'AC'){
-            string = "";
-            input.value = string;
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector("#login-form form");
+    const loginError = loginForm.querySelector(".errorMessage");
+
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("login-email").value.trim();
+        const password = document.getElementById("login-password").value.trim();
+
+        if (email === 'admin@example.com' && password === 'admin123') {
+            showAdminDashboard();
+        } else if(email === 'user@example.com' && password === 'user123'){
+            showForm('home');
         }
-        else if(e.target.innerHTML == 'DEL'){
-            string = string.substring(0, string.length-1);
-            input.value = string;
+         else {
+            document.querySelector('#login-form .errorMessage').textContent = "Invalid credentials.";
         }
-        else{
-            string += e.target.innerHTML;
-            input.value = string;
+    });
+
+    function showAdminDashboard() {
+        const forms = document.querySelectorAll('.form-box');
+        forms.forEach(form => form.style.display = 'none');
+    
+        const dashboard = document.getElementById('admin-dashboard');
+        if (dashboard) dashboard.style.display = 'block';
+    }
+
+    const signupForm = document.querySelector("#signup-form form");
+    const signupError = signupForm.querySelector(".errorMessage");
+
+    signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById("signup-username").value.trim();
+        const email = document.getElementById("signup-email").value.trim();
+        const password = document.getElementById("signup-password").value.trim();
+        const repeatPassword = document.getElementById("signup-repeatPassword").value.trim();
+        const role = document.getElementById("signup-role").value;
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!username || !email || !password || !repeatPassword || !role) {
+            signupError.style.color = "red";
+            signupError.textContent = "All fields are required.";
+        } else if (!emailRegex.test(email)) {
+            signupError.style.color = "red";
+            signupError.textContent = "Enter a valid email.";
+        } else if (password.length < 8) {
+            signupError.style.color = "red";
+            signupError.textContent = "Password must be at least 8 characters.";
+        } else if (password !== repeatPassword) {
+            signupError.style.color = "red";
+            signupError.textContent = "Passwords do not match.";
+        } else {
+            signupError.style.color = "green";
+            signupError.textContent = "Signup successful!";
+            showForm('home');
         }
-        
-    })
-})
+    });
+
+    const forgotForm = document.querySelector("#forgotPassword-form form");
+    const forgotError = forgotForm.querySelector(".errorMessage");
+
+    forgotForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("forgot-email").value.trim();
+        const newPassword = document.getElementById("forgot-password").value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email || !newPassword) {
+            forgotError.style.color = "red";
+            forgotError.textContent = "All fields are required.";
+        } else if (!emailRegex.test(email)) {
+            forgotError.style.color = "red";
+            forgotError.textContent = "Enter a valid email.";
+        } else if (newPassword.length < 8) {
+            forgotError.style.color = "red";
+            forgotError.textContent = "Password must be at least 8 characters.";
+        } else {
+            forgotError.style.color = "green";
+            forgotError.textContent = "Password reset successful!";
+        }
+    });
+});
+
+

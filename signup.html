@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+    <header>
+        <div class="main">
+            <div class="navbar">
+                <div class="icon">
+                    <h2 class="logo">TITLE</h2>
+                </div>
+    
+                <div class="menu">
+                    <ul>
+                        <li><a href="#" onclick="showForm('.main')">HOME</a></li>
+                        <li><a href="#">ABOUT</a></li>
+                        <li><a href="#">SERVICE</a></li>
+                        <li><a href="#">DESIGN</a></li>
+                        <li><a href="#">CONTACT</a></li>
+                    </ul>
+                </div>
+    
+                <div class="loginMenu">
+                    <button class="btn" onclick="showForm('login-form')">login</button>
+                    <button class="btn" onclick="showForm('signup-form')">Signup</button>
+                </div>
+    
+            </div> 
+    </header>
+
+    <div class="admin-dashboard" id="admin-dashboard" style="display: none;">
+        <aside class="sidebar">
+          <h2>Admin</h2>
+          <nav>
+            <ul>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Users</a></li>
+              <li><a href="#">Settings</a></li>
+            </ul>
+          </nav>
+        </aside>
+    
+        <div class="dashboard-main">
+          <header>
+            <h1>Dashboard</h1>
+            <div class="user-info">
+            </div>
+          </header>
+    
+          <section class="cards">
+            <div class="card">
+              <h3>Users</h3>
+              <p>1,024</p>
+            </div>
+            <div class="card">
+              <h3>Sales</h3>
+              <p>$12,345</p>
+            </div>
+            <div class="card">
+              <h3>Performance</h3>
+              <p>92%</p>
+            </div>
+          </section>
+          <button class="btn" onclick="showForm('.main')" >Logout</button>
+
+        </div>
+      </div>
+
+
+    <main>
+
+        
+        <div class="container">
+            <div class="form-box" id="signup-form">
+                <form action="">
+                    <h2>Signup</h2>
+                    <input type="text" name="name" id="signup-username" placeholder="Username">
+                    <input type="email" name="email" id="signup-email" placeholder="Email">
+                    <input type="password" name="password" id="signup-password" placeholder="Password">
+                    <input type="password" name="repeatPassword" id="signup-repeatPassword" placeholder="Repeat Password">
+                    <select name="role" id="signup-role">
+                        <option value="">Select a role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="User">User</option>
+                    </select>
+                    <p class="errorMessage"></p>
+                    <button type="submit" class="button">Signup</button>
+                    <p>Already have an account? <a href="#" onclick="showForm('login-form')" class="link">Login</a></p>
+                </form>
+            </div>
+
+            <div class="form-box" id="login-form">
+                <form action="">
+                    <h2>Login</h2>
+                    <input type="email" name="email" id="login-email" placeholder="Email">
+                    <input type="password" name="password" id="login-password" placeholder="Password">
+                    <p class="errorMessage"></p>
+                    <button type="submit" class="button">Login</button>
+                    <p><a href="#" onclick="showForm('forgotPassword-form')" class="link">Forgot Password?</a></p>
+                    <p>Don't have an account? <a href="#" onclick="showForm('signup-form')" class="link">Signup</a></p>
+                </form>
+            </div>
+
+            <div class="form-box" id="forgotPassword-form">
+                <form action="">
+                    <h2>Forgot Password</h2>
+                    <input type="email" name="email" id="forgot-email" placeholder="Email">
+                    <input type="password" name="password" id="forgot-password" placeholder="New Password">
+                    <p class="errorMessage"></p>
+                    <button type="submit" class="button">Reset</button>
+                    <p>Don't have an account? <a href="#" onclick="showForm('signup-form')" class="link">Signup</a></p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
